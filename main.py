@@ -42,8 +42,8 @@ def actions():
 def login():
     try:
         # I use environment veriable  base on this tutorials https://www.youtube.com/watch?v=IolxqkL7cD8
-        username = os.environ.get('my_facebook_username')
-        password = os.environ.get('my_facebook_password')
+        username = str("01531180425")
+        password = os.environ.get('password')
 
         driver.find_element_by_name("email").send_keys(username)
         driver.find_element_by_name("pass").send_keys(password)
@@ -90,8 +90,8 @@ def activePostAreaAndPostInPage():
         driver.implicitly_wait(implicitlyWaitTime)
         actions.send_keys(Keys.TAB * 5)
         print(str(i) + " tabs Working")
-    actions.send_keys(Keys.ENTER)
-    actions.perform()
+        actions.send_keys(Keys.ENTER)
+        actions.perform()
     
     
   def trytopost():
@@ -137,6 +137,6 @@ driver()
 driver.get("https://facebook.com")
 actions()
 login()
-driver.get("https://www.facebook.com/sushen.biswas/")
+driver.get("https://www.facebook.com/tishaakter.mim.9212301/")
 navigatePagePostAria()
 activePostAreaAndPostInPage()

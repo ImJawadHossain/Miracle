@@ -1,16 +1,6 @@
-#   Copyright (c) 2021.
-#   Version : 0.0.1
-#   Script Author : Sushen Biswas
-#
-#   Sushen Biswas Github Link : https://github.com/sushen
-#
-#   !/usr/bin/env python
-#   coding: utf-8
-import pyautogui
 from selenium import webdriver
 import time
-import random
-import os
+
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
@@ -29,37 +19,101 @@ chrome_options.add_experimental_option("excludeSwitches",["enable-automation"])
 actions = ActionChains(driver)
 
 
-driver.get("https://facebook.com")
-
-try:
-    # I use environment veriable  base on this tutorials https://www.youtube.com/watch?v=IolxqkL7cD8
-    username = os.environ.get('my_facebook_username')
-    password = os.environ.get('my_facebook_password')
-
-    driver.find_element_by_name("email").send_keys(username)
-    driver.find_element_by_name("pass").send_keys("MangoPeople@021")
-    driver.find_element_by_name("login").click()
-
-except:
-    pass
-
-print(input("Press any Key: "))
+driver.get("https://accounts.google.com/signup/v2/webcreateaccount?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=SignUp")
+print(input("pass key: "))
+driver.implicitly_wait(10)
 
 
-driver.get("https://www.facebook.com/groups/402353916617590/permalink/1630582000461436/")
+def checkUssername():
+    i = 0
+    driver.find_element_by_xpath("//input[@id='username']").send_keys("mdjawad")
+    while True:
+        driver.find_element_by_xpath("//input[@id='username']").send_keys(i)
+        driver.find_element_by_xpath("//input[@name='Passwd']").click()
+        driver.implicitly_wait(10)
+        time.sleep(1)
+        driver.find_element_by_xpath("//input[@name='Passwd']").click()
+        try:
+            a = driver.find_element_by_xpath("//div[@class='o6cuMc']").text
+            print(a,'--',i)
+        except:
+            pass
+            print("Ussername abileable")
+        bs = len(str(i))
+        driver.find_element_by_xpath("//input[@id='username']").click()
+        driver.find_element_by_xpath("//input[@id='username']").send_keys(Keys.BACK_SPACE * bs)
+        i += 1
 
-actions.send_keys(Keys.TAB * 23)
-print(input("Press any Key: "))
-driver.implicitly_wait(5)
-actions.send_keys(Keys.ENTER)
-actions.perform()
 
-# pyautogui.press("down")
-actions.send_keys(Keys.BACK_SPACE)
-actions.send_keys(Keys.ARROW_DOWN)
-print(input("Press any Key: "))
-driver.implicitly_wait(5)
-# actions.send_keys(Keys.ENTER)
-actions.perform()
 
-# driver.quit()
+
+
+
+
+
+def gmailCheckLetter():
+    abc = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+           'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+    cba = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+           'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+
+
+    a = 0
+    b = 0
+
+    driver.find_element_by_xpath("//input[@id='username']").send_keys("Jawad")
+
+    while True:
+        if a < 26 and b < 26:
+            print(abc[a] + cba[b])
+
+            l = abc[a] + cba[b]
+
+            driver.find_element_by_xpath("//input[@id='username']").send_keys(l)
+            driver.find_element_by_xpath("//input[@name='Passwd']").click()
+            driver.implicitly_wait(10)
+            time.sleep(1)
+            driver.find_element_by_xpath("//input[@name='Passwd']").click()
+            try:
+                a = driver.find_element_by_xpath("//div[@class='o6cuMc']").text
+                print(a, '--', l)
+            except:
+                pass
+                print("Ussername abileable")
+            bs = len(str(l))
+            driver.find_element_by_xpath("//input[@id='username']").click()
+            driver.find_element_by_xpath("//input[@id='username']").send_keys(Keys.BACK_SPACE * bs)
+
+
+            a += 1
+
+        if a == 26:
+            a = 0
+            b += 1
+            if b < 26:
+                print(abc[a] + cba[b])
+
+                y = abc[a] + cba[b]
+
+                driver.find_element_by_xpath("//input[@id='username']").send_keys(y)
+                driver.find_element_by_xpath("//input[@name='Passwd']").click()
+                driver.implicitly_wait(10)
+                time.sleep(1)
+                driver.find_element_by_xpath("//input[@name='Passwd']").click()
+                try:
+                    a = driver.find_element_by_xpath("//div[@class='o6cuMc']").text
+                    print(a, '--', y)
+                except:
+                    pass
+                    print("Ussername abileable")
+                bs = len(y)
+                driver.find_element_by_xpath("//input[@id='username']").click()
+                driver.find_element_by_xpath("//input[@id='username']").send_keys(Keys.BACK_SPACE * bs)
+
+
+            a += 1
+
+
+gmailCheckLetter()
